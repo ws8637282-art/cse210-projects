@@ -1,48 +1,51 @@
 using System.Collections.Generic;
  
-class Program
+public class Video
 {
-    static void Main(string[] args)
+    private string _title;
+    private string _author;
+    private int _lengthInSeconds;
+    private List<Comment> _comments;
+ 
+    public Video(string title, string author, int lengthInSeconds)
     {
-        Video firstVideo = new Video(
-            "Learning C# Classes",
-            "Code Academy",
-            620);
-        firstVideo.AddComment(new Comment("Jamie", "The class examples were very clear."));
-        firstVideo.AddComment(new Comment("Taylor", "I finally understand constructors."));
-        firstVideo.AddComment(new Comment("Morgan", "The practice exercise was helpful."));
+        _title = title;
+        _author = author;
+        _lengthInSeconds = lengthInSeconds;
+        _comments = new List<Comment>();
+    }
  
-        Video secondVideo = new Video(
-            "Easy Weeknight Recipes",
-            "Home Kitchen",
-            845);
-        secondVideo.AddComment(new Comment("Sam", "I made this recipe for dinner and loved it."));
-        secondVideo.AddComment(new Comment("Alex", "The instructions were easy to follow."));
-        secondVideo.AddComment(new Comment("Riley", "I will try adding extra vegetables next time."));
+    public string Title
+    {
+        get { return _title; }
+        set { _title = value; }
+    }
  
-        Video thirdVideo = new Video(
-            "Beginner Landscape Photography",
-            "Outdoor Focus",
-            1130);
-        thirdVideo.AddComment(new Comment("Jordan", "The lighting tips made a big difference."));
-        thirdVideo.AddComment(new Comment("Casey", "The mountain examples were beautiful."));
-        thirdVideo.AddComment(new Comment("Drew", "I am taking my camera outside this weekend."));
+    public string Author
+    {
+        get { return _author; }
+        set { _author = value; }
+    }
  
-        List<Video> videos = new List<Video> { firstVideo, secondVideo, thirdVideo };
+    public int LengthInSeconds
+    {
+        get { return _lengthInSeconds; }
+        set { _lengthInSeconds = value; }
+    }
  
-        foreach (Video video in videos)
-        {
-            Console.WriteLine($"Title: {video.Title}");
-            Console.WriteLine($"Author: {video.Author}");
-            Console.WriteLine($"Length: {video.LengthInSeconds} seconds");
-            Console.WriteLine($"Comments: {video.GetNumberOfComments()}");
+    public List<Comment> Comments
+    {
+        get { return _comments; }
+        set { _comments = value; }
+    }
  
-            foreach (Comment comment in video.Comments)
-            {
-                Console.WriteLine($"- {comment.Name}: {comment.Text}");
-            }
+    public void AddComment(Comment comment)
+    {
+        _comments.Add(comment);
+    }
  
-            Console.WriteLine();
-        }
+    public int GetNumberOfComments()
+    {
+        return _comments.Count;
     }
 }
