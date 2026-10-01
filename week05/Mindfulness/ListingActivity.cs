@@ -17,7 +17,7 @@ public class ListingActivity : Activity
     public ListingActivity()
         : base(
             "Listing",
-            "This activity will help you reflect on the good things in your life.")
+            "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.")
     {
     }
 
@@ -30,7 +30,7 @@ public class ListingActivity : Activity
         Console.WriteLine("\nList as many responses as you can to the following prompt:");
         Console.WriteLine($"\n--- {prompt} ---");
 
-        Console.Write("\nYou may begin in: ");
+        Console.WriteLine("\nYou may begin in:");
         ShowCountdown(5);
 
         int count = 0;
@@ -41,6 +41,7 @@ public class ListingActivity : Activity
         {
             Console.Write("> ");
             Console.ReadLine();
+
             count++;
         }
 
