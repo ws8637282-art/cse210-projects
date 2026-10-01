@@ -1,52 +1,79 @@
  using System;
 using System.Collections.Generic;
+using System.Threading;
 
-public class ListingActivity : Activity
+public class Activity
 {
-    private List<string> _prompts = new List<string>
-    {
-        "Who are people that you appreciate?",
-        "What are personal strengths of yours?",
-        "Who are people that you have helped this week?",
-        "When have you felt the Holy Ghost this month?",
-        "Who are some of your personal heroes?"
-    };
+    private string _name;
+    private string _description;
+    protected int _duration;
 
-    private Random _random = new Random();
-
-    public ListingActivity()
-        : base(
-            "Listing",
-            "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.")
+    public Activity(string name, string description)
     {
+        _name = name;
+        _description = description;
     }
 
-    public void Run()
+    public void DisplayStartingMessage()
     {
-        DisplayStartingMessage();
+        Console.Clear();
+        Console.WriteLine($"Welcome to the {_name} Activity.\n");
+        Console.WriteLine(_description);
 
-        string prompt = _prompts[_random.Next(_prompts.Count)];
+        Console.Write("\nHow long, in seconds, would you like for your session? ");
+        _duration = int.Parse(Console.ReadLine() ?? "0");
 
-        Console.WriteLine("\nList as many responses as you can to the following prompt:");
-        Console.WriteLine($"\n--- {prompt} ---");
+        Console.WriteLine("\nPrepare to begin...");
+        ShowSpinner(3);
+    }
 
-        Console.WriteLine("\nYou may begin in:");
-        ShowCountdown(5);
+    public void DisplayEndingMessage()
+    {
+        Console.WriteLine("\nWell done!");
+        ShowSpinner(3);
 
-        int count = 0;
+        Console.WriteLine($"\nYou have completed {_duration} seconds of the {_name} Activity.");
+        ShowSpinner(3);
+    }
 
-        DateTime endTime = DateTime.Now.AddSeconds(_duration);
+    public void ShowSpinner(int seconds)
+    {
+        List<string> spinner = new List<string>
+        {
+            "|",
+            "/",
+            "-",
+            "\\"
+        };
+
+        DateTime endTime = DateTime.Now.AddSeconds(seconds);
+
+        int i = 0;
 
         while (DateTime.Now < endTime)
         {
-            Console.Write("> ");
-            Console.ReadLine();
+            Console.Write(spinner[i]);
+            Thread.Sleep(250);
+            Console.Write("\b \b");
 
-            count++;
+            i++;
+
+            if (i >= spinner.Count)
+            {
+                i = 0;
+            }
+        }
+    }
+
+    public void ShowCountdown(int seconds)
+    {
+        for (int i = seconds; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
         }
 
-        Console.WriteLine($"\nYou listed {count} items!");
-
-        DisplayEndingMessage();
+        Console.WriteLine();
     }
 }
