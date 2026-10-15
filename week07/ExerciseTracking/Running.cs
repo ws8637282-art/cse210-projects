@@ -27,14 +27,9 @@ public class Running : Activity
 
     public override string GetSummary()
     {
-        return $"{GetDateString()} Running ({GetLength()} min) - " +
+        return $"{GetDate()} Running ({GetLength()} min) - " +
                $"Distance {GetDistance():0.0} miles, " +
                $"Speed {GetSpeed():0.0} mph, " +
                $"Pace: {GetPace():0.0} min per mile";
-    }
-
-    private string GetDateString()
-    {
-        return DateTime.Now.ToString("dd MMM yyyy");
     }
 }
