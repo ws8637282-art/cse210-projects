@@ -29,4 +29,9 @@ public abstract class Activity
     {
         return _length;
     }
+
+    public string GetDate()
+    {
+        return _date.ToString("dd MMM yyyy");
+    }
 }
