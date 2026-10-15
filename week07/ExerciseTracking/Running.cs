@@ -24,12 +24,4 @@ public class Running : Activity
     {
         return GetLength() / GetDistance();
     }
-
-    public override string GetSummary()
-    {
-        return $"{GetDate()} Running ({GetLength()} min) - " +
-               $"Distance {GetDistance():0.0} miles, " +
-               $"Speed {GetSpeed():0.0} mph, " +
-               $"Pace: {GetPace():0.0} min per mile";
-    }
 }
